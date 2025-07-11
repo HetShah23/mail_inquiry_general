@@ -17,7 +17,7 @@ app.use(cookieParser());
 app.use(compression());
 
 // import all the routes in this file
-const mainRouter = require("./routes/main.route");
+const mainRouter = require("../routes/main.route");
 
 // all the routes
 app.use("/", mainRouter);
@@ -27,5 +27,5 @@ const server = http.createServer(app);
 server.listen(3002);
 
 // middleware error handler
-const errorHandler = require("./helper/error");
+const errorHandler = require("../helper/error");
 app.use(errorHandler);
