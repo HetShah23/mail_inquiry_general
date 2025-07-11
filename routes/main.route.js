@@ -11,6 +11,14 @@ router.get("/", (req, res) => {
     res.send("welcome");
 });
 
+const fromat_mail_data = data => {
+    let data_string = "New Inquiry from website:";
+    for(const key in data) {
+        data_string = data_string + (`\n ${key} - ${data[key]}`);
+    }
+    return (data_string)
+}
+
 
 router.post(
   "/handle-mail",
@@ -29,9 +37,7 @@ router.post(
       reciver_email
     } = req.body
 
-    const { html } = await setupEmailTemplateForVerification(data);
-
-    const email_status = await send_email(reciver_email, html, sender_email, sender_password);
+    const email_status = await send_email(reciver_email, fromat_mail_data(data), sender_email, sender_password);
     if (email_status.failed) {
       give_response(res, 502, false, `EMAIL NOT SENT TO ${reciver_email}`);
     } else {
