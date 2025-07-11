@@ -15,7 +15,7 @@ exports.setupEmailTemplateForVerification = function (data) {
         const formated_mail_data = fromat_mail_data(data);
         fs.readFile(name, { encoding: "utf-8" }, (err, html) => {
             if (err) {
-                reject(err);
+                reject(err); 
             } else {
                 html = html.split("{{data}}").join(formated_mail_data);
                 resolve({ html });
